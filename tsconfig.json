@@ -6,8 +6,7 @@
     "lib": ["es2020", "dom"],
     "outDir": "./dist",
     "strict": true,
-    "esModuleInterop": true,
-    "allowImportingTsExtensions": true
+    "esModuleInterop": true
   },
   "include": ["**/*.ts"]
 }
