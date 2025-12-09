@@ -5,9 +5,10 @@
     "moduleResolution": "NodeNext",
     "strict": true,
     "esModuleInterop": true,
-
+    "outDir": "dist",
     "allowImportingTsExtensions": true,
     "noEmit": true
   },
-  "include": ["src/**/*.ts", "global.d.ts"]
+  "include": ["**/*.ts", "global.d.ts"],
+  "exclude": ["node_modules", "dist"]
 }

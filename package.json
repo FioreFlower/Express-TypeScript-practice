@@ -5,12 +5,13 @@
   "license": "ISC",
   "author": "",
   "type": "module",
-  "main": "src/app.ts",
+  "main": "src/server.ts",
   "scripts": {
-    "start": "node --loader ts-node/esm src/app.ts",
+    "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon",
-    "prod": "cross-env NODE_ENV=production nodemon"
+    "dev": "nodemon --watch '**/*.ts' --exec node --loader ts-node/esm src/server.ts",
+    "prod": "cross-env NODE_ENV=production nodemon --watch '**/*.ts' --exec node --loader ts-node/esm src/server.ts",
+    "build": "tsc -p tsconfig.json"
   },
   "dependencies": {
     "dayjs": "^1.11.19",
