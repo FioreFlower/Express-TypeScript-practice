@@ -1,1 +1,37 @@
+# 기본적으로 텍스트 파일은 자동 정규화 + LF 유지
 * text=auto eol=lf
+
+# TypeScript / JavaScript는 무조건 LF
+*.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+
+# JSON / YAML / 기타 설정 파일은 LF
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.md text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.env text eol=lf
+
+# Binary files - Git이 텍스트 처리를 하지 않도록
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.exe binary
+
+# Node 관련
+package-lock.json text eol=lf
+
+# OS 관련
+*.bat text eol=crlf
+*.sh  text eol=lf
+
+# Git이 내부적으로 diff/merge를 비활성화(바이너리 취급)
+*.lock binary
