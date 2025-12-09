@@ -12,7 +12,6 @@ const __dirname = path.dirname(__filename);
 // ──────────────────────────────────────────────
 // 환경 설정
 // ──────────────────────────────────────────────
-type LogLevel = "INFO" | "WARN" | "ERROR";
 const isDebug = process.env.NODE_ENV !== "production";
 
 
@@ -21,7 +20,7 @@ const isDebug = process.env.NODE_ENV !== "production";
 // ──────────────────────────────────────────────
 const getTimestamp = () => dayjs().format("YYYY-MM-DD HH:mm:ss");
 
-const shouldWriteToFile = (level: LogLevel) => {
+const shouldWriteToFile = (level) => {
     // 개발 모드 → 모든 로그 기록
     if (isDebug) return true;
 
@@ -34,7 +33,7 @@ const getLogFilePath = () => {
     return path.join(__dirname, `logs/log_${date}.log`);
 };
 
-const colorize = (level: LogLevel, text: string) => {
+const colorize = (level, text) => {
     switch (level) {
         case "INFO":
             return `\x1b[34m${text}\x1b[0m`; // 초록
@@ -51,7 +50,7 @@ const colorize = (level: LogLevel, text: string) => {
 // ──────────────────────────────────────────────
 // 내부 로깅 처리 함수
 // ──────────────────────────────────────────────
-const write = (level: LogLevel, message: string) => {
+const write = (level, message) => {
     const time = getTimestamp();
     const log = `[${level}] ${time} - ${message}\n`;
 
@@ -73,13 +72,26 @@ const write = (level: LogLevel, message: string) => {
     }
 };
 
+export const regResLogger = (req, res, next) => {
+    const start = Date.now();
+    console.log(`start : ${req.method} ${req.url}`);
+
+    // 응답이 끝난 후에 로그
+    res.on("finish", () => {
+        const diffTime = Date.now() - start;
+        console.log(`end : ${req.method} ${req.originalUrl} ${diffTime}ms`);
+    });
+
+    next();
+};
+
 // ──────────────────────────────────────────────
 // 외부에서 사용하는 API
 // ──────────────────────────────────────────────
-const Log = {
-    info: (msg: string) => write("INFO", msg),
-    warn: (msg: string) => write("WARN", msg),
-    error: (msg: string) => write("ERROR", msg),
+const Logger = {
+    info: (msg) => write("INFO", msg),
+    warn: (msg) => write("WARN", msg),
+    error: (msg) => write("ERROR", msg),
 };
 
-export default Log;
+export default Logger;
