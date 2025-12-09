@@ -35,3 +35,4 @@ package-lock.json text eol=lf
 
 # Git이 내부적으로 diff/merge를 비활성화(바이너리 취급)
 *.lock binary
+
