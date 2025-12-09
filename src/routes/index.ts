@@ -1,5 +1,6 @@
 import { Router } from "express";
 import usersRouter from "./users.ts";
+import Log from "../DEBUG/Utils/log.ts";
 
 const router = Router();
 
